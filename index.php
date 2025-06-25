@@ -1,9 +1,11 @@
 <?php
 include_once __DIR__ ."/Services/TodoService.php";
+$conn = include_once __DIR__ ."/db.php";
+
 
 use App\Services\TodoService;
 
-$todoService = new TodoService;
+$todoService = new TodoService($conn);
 $todos= $todoService->getTodos();
 ?>
 
