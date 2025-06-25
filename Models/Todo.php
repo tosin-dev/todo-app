@@ -36,8 +36,18 @@ class Todo{
         return $this->completed_at;
     }
     public function getStatus(): string{
-        return $this->status;
+        return ucfirst(strtolower($this->status));
     }
 
-
+    public function getBadgeType():string{
+        $badgeType = "info";
+        if ($this->getStatus()==Todo::STATUS_COMPLETED){
+            $badgeType = 'success';
+        }elseif ($this->getStatus()==Todo::STATUS_IN_PROGRESS){
+            $badgeType = 'primary';
+        } elseif($this->getStatus()==Todo::STATUS_PENDING) {
+            $badgeType = 'warning';
+        }
+        return $badgeType;
+    }
 }

@@ -32,13 +32,7 @@ $todos= $todoService->getTodos();
             <tbody>
                 <?php
                     foreach($todos as $todo) { 
-                        if ($todo->getStatus()==Todo::STATUS_COMPLETED){
-                            $badgeType = 'success';
-                        }elseif ($todo->getStatus()==Todo::STATUS_IN_PROGRESS){
-                            $badgeType = 'primary';
-                        } elseif($todo->getStatus()==Todo::STATUS_PENDING) {
-                            $badgeType = 'warning';
-                        }
+                        $badgeType = $todo->getBadgeType();
                         echo "<tr>
                             <td>".$todo->getName()."</td>  
                             <td><span class='badge bg-". $badgeType."'>".$todo->getStatus()."</span></td>
