@@ -1,8 +1,6 @@
 <?php
-include_once __DIR__ ."/Models/Todo.php";
 include_once __DIR__ ."/Services/TodoService.php";
 
-use App\Models\Todo;
 use App\Services\TodoService;
 
 $todoService = new TodoService;
