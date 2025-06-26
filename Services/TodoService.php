@@ -21,7 +21,7 @@ class TodoService
 
         $todos=[];
         foreach($tasks as $task){
-            $todoObject = new Todo($task["name"], $task["status"], $task["created_at"], $task["updated_at"], $task["completed_at"]);
+            $todoObject = new Todo($task["id"], $task["name"], $task["status"], $task["created_at"], $task["updated_at"], $task["completed_at"]);
             $todos[] = $todoObject;
         
         }
@@ -49,7 +49,7 @@ class TodoService
                 $tasks[]=$task;
             };
         }elseif($dataSource=="db"){
-            $sql = "SELECT name, status, created_at, updated_at, completed_at from todos";
+            $sql = "SELECT id, name, status, created_at, updated_at, completed_at from todos";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();

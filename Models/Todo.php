@@ -1,18 +1,21 @@
 <?php
+declare(strict_types=1);
 namespace App\Models;
 
 class Todo{
     public const STATUS_PENDING = "Pending";
     public const STATUS_COMPLETED =  "Completed";
     public const STATUS_IN_PROGRESS = "In progress";
+    private int $id;
     private string $name;
     private string $status;
     private string $created_at;
     private string $updated_at;
-    private string $completed_at;
+    private ?string $completed_at = null;
 
-    public function __construct(string $name, string $status, string $created_at, string $updated_at, string $completed_at )
+    public function __construct(int $id, string $name, string $status, string $created_at, string $updated_at, ?string $completed_at = null)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->status = $status;
         $this->created_at = $created_at;
@@ -20,6 +23,9 @@ class Todo{
         $this->completed_at = $completed_at;
     }
 
+    public function getId():int{
+        return $this->id;
+    }
     public function getName(): string{
         return $this->name;
     }
@@ -32,7 +38,7 @@ class Todo{
         return $this->updated_at;
     }
 
-    public function getCompletedDate(): string{
+    public function getCompletedDate(): ?string{
         return $this->completed_at;
     }
     public function getStatus(): string{

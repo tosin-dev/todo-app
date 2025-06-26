@@ -2,7 +2,7 @@
 include_once __DIR__ ."/Services/TodoService.php";
 $conn = include_once __DIR__ ."/db.php";
 
-
+use App\Models\Todo;
 use App\Services\TodoService;
 
 $todoService = new TodoService($conn);
@@ -27,17 +27,23 @@ $todos= $todoService->getTodos();
                     <th>Status</th>
                     <th>Date Created</th>
                     <th>Date Completed</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                     foreach($todos as $todo) { 
+                        $actions="";
+                        if($todo->getStatus()!==Todo::STATUS_COMPLETED){
+                            $actions="<a href=update.php?id={$todo->getId()}>Mark as completed</a>";
+                        }
                         $badgeType = $todo->getBadgeType();
                         echo "<tr>
                             <td>".$todo->getName()."</td>  
                             <td><span class='badge bg-". $badgeType."'>".$todo->getStatus()."</span></td>
                             <td>".$todo->getCreatedDate()."</td>
                             <td>".$todo->getCompletedDate()."</td>
+                            <td>$actions</td>
                         </tr>";
                     }
                 ?>
